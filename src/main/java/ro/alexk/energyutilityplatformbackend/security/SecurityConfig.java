@@ -60,13 +60,11 @@ public class SecurityConfig {
     public UserDetailsService users(PasswordEncoder passwordEncoder) {
         var user = User.builder()
                 .username("user")
-//                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
                 .password(passwordEncoder.encode("password"))
                 .roles("USER")
                 .build();
         var admin = User.builder()
                 .username("admin")
-//                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
                 .password(passwordEncoder.encode("password"))
                 .roles("USER", "ADMIN")
                 .build();

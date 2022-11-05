@@ -7,7 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ro.alexk.energyutilityplatformbackend.dtos.Credentials;
+import ro.alexk.energyutilityplatformbackend.dtos.CredentialsDto;
 import ro.alexk.energyutilityplatformbackend.services.JwtService;
 
 @RestController
@@ -18,7 +18,7 @@ public class AuthController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody Credentials userLogin) {
+    public ResponseEntity<String> login(@RequestBody CredentialsDto userLogin) {
         var auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLogin.username(), userLogin.password())
         );

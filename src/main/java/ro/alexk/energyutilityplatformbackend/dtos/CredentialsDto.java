@@ -1,6 +1,6 @@
 package ro.alexk.energyutilityplatformbackend.dtos;
 
-public record Credentials(
+public record CredentialsDto(
         String username,
         String password
 ) {
