@@ -1,4 +1,4 @@
-package ro.alexk.energyutilityplatformbackend.dtos;
+package ro.alexk.energyutilityplatformbackend.dtos.auth;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;

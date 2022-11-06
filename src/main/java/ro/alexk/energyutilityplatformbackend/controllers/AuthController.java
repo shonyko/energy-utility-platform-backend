@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ro.alexk.energyutilityplatformbackend.dtos.CredentialsDto;
-import ro.alexk.energyutilityplatformbackend.dtos.RegisterDto;
+import ro.alexk.energyutilityplatformbackend.dtos.auth.CredentialsDto;
+import ro.alexk.energyutilityplatformbackend.dtos.auth.RegisterDto;
 import ro.alexk.energyutilityplatformbackend.mappers.AuthMapper;
 import ro.alexk.energyutilityplatformbackend.services.AuthService;
 import ro.alexk.energyutilityplatformbackend.services.JwtService;
@@ -32,7 +32,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody @Valid RegisterDto registerDto) {
         return ResponseEntity.ok(jwtService.generateToken(
-                authService.register(mapper.from(registerDto))
+                authService.register(mapper.map(registerDto))
         ));
     }
 }

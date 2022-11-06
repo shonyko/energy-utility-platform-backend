@@ -1,7 +1,6 @@
 package ro.alexk.energyutilityplatformbackend.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User register(User user) {
-        if (userService.usernameExists(user.getUsername()))
-            throw new DataIntegrityViolationException("Username already exists!");
+        userService.checkUsernameAvailability(user.getUsername());
         return userService.create(user);
     }
 }

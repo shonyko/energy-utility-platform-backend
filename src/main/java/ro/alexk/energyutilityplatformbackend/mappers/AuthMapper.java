@@ -5,8 +5,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ro.alexk.energyutilityplatformbackend.dtos.CredentialsDto;
-import ro.alexk.energyutilityplatformbackend.dtos.RegisterDto;
+import ro.alexk.energyutilityplatformbackend.dtos.auth.CredentialsDto;
+import ro.alexk.energyutilityplatformbackend.dtos.auth.RegisterDto;
 import ro.alexk.energyutilityplatformbackend.entities.Credentials;
 import ro.alexk.energyutilityplatformbackend.entities.User;
 
@@ -20,10 +20,10 @@ public abstract class AuthMapper {
 
     @Named("fromCredentialsDto")
     @Mapping(source = "password", target = "password", qualifiedByName = "encodePassword")
-    public abstract Credentials from(CredentialsDto credentialsDto);
+    public abstract Credentials map(CredentialsDto credentialsDto);
 
     @Mapping(source = "credentials", target = "credentials", qualifiedByName = "fromCredentialsDto")
-    public abstract User from(RegisterDto registerDto);
+    public abstract User map(RegisterDto registerDto);
 
     @Named("encodePassword")
     protected String encodePassword(String password) {

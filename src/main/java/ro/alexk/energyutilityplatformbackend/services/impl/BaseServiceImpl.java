@@ -37,6 +37,8 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public void delete(String id) {
-        repository.deleteById(UUID.fromString(id));
+        var uuid = UUID.fromString(id);
+        if (!repository.existsById(uuid)) return;
+        repository.deleteById(uuid);
     }
 }
