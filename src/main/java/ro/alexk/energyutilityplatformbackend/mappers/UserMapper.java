@@ -12,7 +12,7 @@ import java.util.Set;
         componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
-public abstract class UserMapper {
+public abstract class UserMapper implements BaseMapper<User, UserCreateDto, UserDto, UserUpdateDto> {
 
     @Mapping(target = "id", ignore = true)
     public abstract User map(UserCreateDto from);

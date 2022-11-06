@@ -1,9 +1,7 @@
 package ro.alexk.energyutilityplatformbackend.mappers;
 
-import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ro.alexk.energyutilityplatformbackend.dtos.auth.CredentialsDto;
 import ro.alexk.energyutilityplatformbackend.dtos.auth.RegisterDto;
@@ -12,7 +10,10 @@ import ro.alexk.energyutilityplatformbackend.entities.User;
 
 import javax.annotation.Resource;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(
+        componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
+)
 public abstract class AuthMapper {
 
     @Resource

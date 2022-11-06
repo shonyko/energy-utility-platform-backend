@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "addresses")
-public class Address {
+public class Address implements BaseEntity {
 
     @Id
     @GeneratedValue

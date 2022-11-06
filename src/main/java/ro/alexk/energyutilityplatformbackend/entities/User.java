@@ -19,7 +19,7 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User implements UserDetails {
+public class User implements BaseEntity, UserDetails {
 
     @Id
     @GeneratedValue

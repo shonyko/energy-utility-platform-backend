@@ -3,7 +3,6 @@ package ro.alexk.energyutilityplatformbackend.services.impl;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ro.alexk.energyutilityplatformbackend.entities.User;
-import ro.alexk.energyutilityplatformbackend.exceptions.ResourceNotFoundException;
 import ro.alexk.energyutilityplatformbackend.repositories.UserRepository;
 import ro.alexk.energyutilityplatformbackend.services.UserService;
 
@@ -25,10 +24,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public User update(User user) {
-        if (!userRepository.existsById(user.getId())) throw new ResourceNotFoundException(NOT_FOUND_MESSAGE);
         if (userRepository.existsByCredentialsUsernameAndIdNot(user.getUsername(), user.getId()))
             throw new DataIntegrityViolationException("Username already exists!");
-
         return super.update(user);
     }
 

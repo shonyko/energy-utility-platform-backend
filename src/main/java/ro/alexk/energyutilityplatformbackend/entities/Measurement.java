@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "measurements")
-public class Measurement {
+public class Measurement implements BaseEntity {
 
     @Id
     @GeneratedValue
