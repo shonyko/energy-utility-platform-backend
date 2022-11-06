@@ -3,9 +3,9 @@ package ro.alexk.energyutilityplatformbackend.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ro.alexk.energyutilityplatformbackend.entities.BaseEntity;
-import ro.alexk.energyutilityplatformbackend.exceptions.ResourceNotFoundException;
 import ro.alexk.energyutilityplatformbackend.services.BaseService;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -21,9 +21,19 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
     }
 
     @Override
+    public T findById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(NOT_FOUND_MESSAGE));
+    }
+
+    @Override
     public T findById(String id) {
-        return repository.findById(UUID.fromString(id))
-                .orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND_MESSAGE));
+        return findById(UUID.fromString(id));
+    }
+
+    @Override
+    public T findById(T T) {
+        return findById(T.getId());
     }
 
     @Override
@@ -33,7 +43,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
     @Override
     public T update(T T) {
-        if (!repository.existsById(T.getId())) throw new ResourceNotFoundException(NOT_FOUND_MESSAGE);
+        checkExists(T.getId());
         return repository.save(T);
     }
 
@@ -42,5 +52,15 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
         var uuid = UUID.fromString(id);
         if (!repository.existsById(uuid)) return;
         repository.deleteById(uuid);
+    }
+
+    @Override
+    public T findReferenceById(UUID id) {
+        return repository.getReferenceById(id);
+    }
+
+    // Utils
+    protected void checkExists(UUID id) {
+        if (!repository.existsById(id)) throw new EntityNotFoundException(NOT_FOUND_MESSAGE);
     }
 }

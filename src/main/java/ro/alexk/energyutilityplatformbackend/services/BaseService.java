@@ -1,6 +1,7 @@
 package ro.alexk.energyutilityplatformbackend.services;
 
 import java.util.Set;
+import java.util.UUID;
 
 public interface BaseService<T> {
 
@@ -8,11 +9,17 @@ public interface BaseService<T> {
 
     T create(T T);
 
+    T findById(UUID id);
+
     T findById(String id);
+
+    T findById(T T);
 
     Set<T> findAll();
 
     T update(T T);
 
     void delete(String id);
+
+    T findReferenceById(UUID id);
 }

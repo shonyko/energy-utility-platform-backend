@@ -14,7 +14,6 @@ import java.util.*;
 @Getter
 @Setter
 @ToString
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,8 +33,8 @@ public class User implements BaseEntity, UserDetails {
     @Column(nullable = false)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
     @ToString.Exclude
+    @OneToMany(mappedBy = "user")
     private Set<Device> devices = new HashSet<>();
 
     @Override

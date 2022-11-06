@@ -9,17 +9,19 @@ import ro.alexk.energyutilityplatformbackend.dtos.address.AddressDto;
 import ro.alexk.energyutilityplatformbackend.dtos.address.AddressUpdateDto;
 import ro.alexk.energyutilityplatformbackend.entities.Address;
 import ro.alexk.energyutilityplatformbackend.mappers.AddressMapper;
+import ro.alexk.energyutilityplatformbackend.mappers.context.AddressUpdateContext;
 import ro.alexk.energyutilityplatformbackend.services.AddressService;
 
 @Admin
 @Validated
 @RestController
 @RequestMapping(AddressController.PATH)
-public class AddressController extends BaseController<Address, AddressCreateDto, AddressDto, AddressUpdateDto> {
+public class AddressController
+        extends BaseController<Address, AddressCreateDto, AddressDto, AddressUpdateDto, AddressUpdateContext> {
 
     public static final String PATH = "/api/addresses";
 
     public AddressController(AddressService service, AddressMapper mapper) {
-        super(service, mapper);
+        super(service, mapper, AddressUpdateContext::new);
     }
 }

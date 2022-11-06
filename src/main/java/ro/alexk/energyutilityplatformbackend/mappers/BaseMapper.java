@@ -5,7 +5,7 @@ import ro.alexk.energyutilityplatformbackend.entities.BaseEntity;
 
 import java.util.Set;
 
-public interface BaseMapper<T extends BaseEntity, C, R, U> {
+public interface BaseMapper<T extends BaseEntity, C, R, U, CTX> {
 
     T map(C from);
 
@@ -13,5 +13,5 @@ public interface BaseMapper<T extends BaseEntity, C, R, U> {
 
     Set<R> map(Set<T> from);
 
-    T map(U from, @Context UpdateContext context);
+    T map(U from, @Context CTX context);
 }

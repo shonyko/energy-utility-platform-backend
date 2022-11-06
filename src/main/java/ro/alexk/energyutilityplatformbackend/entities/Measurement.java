@@ -1,14 +1,16 @@
 package ro.alexk.energyutilityplatformbackend.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,6 +27,20 @@ public class Measurement implements BaseEntity {
     @Column(nullable = false)
     private Double energyConsumption;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Device device;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Measurement that = (Measurement) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
