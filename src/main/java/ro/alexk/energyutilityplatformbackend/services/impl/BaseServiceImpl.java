@@ -1,8 +1,8 @@
 package ro.alexk.energyutilityplatformbackend.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ro.alexk.energyutilityplatformbackend.exceptions.ResourceNotFoundException;
-import ro.alexk.energyutilityplatformbackend.repositories.ExtendedJpaRepository;
 import ro.alexk.energyutilityplatformbackend.services.BaseService;
 
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
-    private final ExtendedJpaRepository<T> repository;
+    private final JpaRepository<T, UUID> repository;
 
     @Override
     public T create(T T) {

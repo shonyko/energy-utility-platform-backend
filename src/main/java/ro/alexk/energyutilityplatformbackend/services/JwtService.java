@@ -1,8 +1,8 @@
 package ro.alexk.energyutilityplatformbackend.services;
 
-import org.springframework.security.core.Authentication;
+import ro.alexk.energyutilityplatformbackend.entities.User;
 
 public interface JwtService {
 
-    String generateToken(Authentication auth);
+    String generateToken(User user);
 }

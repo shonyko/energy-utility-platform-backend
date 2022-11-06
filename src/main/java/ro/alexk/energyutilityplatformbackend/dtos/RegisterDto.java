@@ -1,13 +1,17 @@
 package ro.alexk.energyutilityplatformbackend.dtos;
 
+import ro.alexk.energyutilityplatformbackend.enums.Role;
+
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public record CredentialsDto(
+public record RegisterDto(
         @NotNull @NotEmpty @NotBlank
-        String username,
-        @NotNull @NotEmpty @NotBlank
-        String password
+        String name,
+        Role role,
+        @Valid
+        CredentialsDto credentials
 ) {
 }

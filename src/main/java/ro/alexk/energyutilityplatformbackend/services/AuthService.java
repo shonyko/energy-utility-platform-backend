@@ -2,7 +2,9 @@ package ro.alexk.energyutilityplatformbackend.services;
 
 import ro.alexk.energyutilityplatformbackend.entities.User;
 
-public interface UserService extends BaseService<User> {
+public interface AuthService {
 
-    boolean usernameExists(String username);
+    User login(String username, String password);
+
+    User register(User user);
 }
