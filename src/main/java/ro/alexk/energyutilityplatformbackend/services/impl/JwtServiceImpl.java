@@ -26,7 +26,7 @@ public class JwtServiceImpl implements JwtService {
         var authorities = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority).toList();
 
-        return generateToken(authorities, user.getName());
+        return generateToken(authorities, user.getId().toString());
     }
 
     private String generateToken(List<String> authorities, String subject) {
