@@ -10,6 +10,7 @@ public record DeviceDto(
         UUID id,
         String description,
         AddressDto address,
+        Double maxHourlyConsumption,
         UserDto user
 ) {
 }

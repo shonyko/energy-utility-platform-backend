@@ -27,6 +27,8 @@ public class Device implements BaseEntity {
     @ManyToOne(optional = false)
     private Address address;
 
+    private Double maxHourlyConsumption;
+
     @ManyToOne
     private User user;
 
