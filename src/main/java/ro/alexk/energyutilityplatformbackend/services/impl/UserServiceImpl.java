@@ -66,4 +66,14 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         device.setUser(user);
         deviceService.update(device);
     }
+
+    @Override
+    public void delete(String id) {
+        var devices = deviceService.findByUserId(id);
+        devices.forEach(device -> {
+            device.setUser(null);
+            deviceService.update(device);
+        });
+        super.delete(id);
+    }
 }

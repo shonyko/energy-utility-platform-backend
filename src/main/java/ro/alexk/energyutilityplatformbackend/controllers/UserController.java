@@ -19,6 +19,7 @@ import java.util.Set;
 @Validated
 @RestController
 @RequestMapping(UserController.PATH)
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController extends BaseController<User, UserCreateDto, UserDto, UserUpdateDto, UserUpdateContext> {
 
     public static final String PATH = "/api/users";

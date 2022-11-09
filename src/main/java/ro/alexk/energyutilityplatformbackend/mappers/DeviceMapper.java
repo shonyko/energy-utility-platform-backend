@@ -26,6 +26,7 @@ public abstract class DeviceMapper
 
     public abstract Set<DeviceDto> map(Set<Device> from);
 
+    @Mapping(source = "addressId", target = "address", qualifiedByName = "addressIdToEntity")
     public abstract Device map(DeviceUpdateDto from, @Context DeviceUpdateContext context);
 
     @Named("addressIdToEntity")

@@ -21,6 +21,7 @@ import java.util.Set;
 @Validated
 @RestController
 @RequestMapping(DeviceController.PATH)
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class DeviceController
         extends BaseController<Device, DeviceCreateDto, DeviceDto, DeviceUpdateDto, DeviceUpdateContext> {
 

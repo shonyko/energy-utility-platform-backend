@@ -1,6 +1,7 @@
 package ro.alexk.energyutilityplatformbackend.controllers;
 
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ro.alexk.energyutilityplatformbackend.annotations.Admin;
@@ -16,6 +17,7 @@ import ro.alexk.energyutilityplatformbackend.services.AddressService;
 @Validated
 @RestController
 @RequestMapping(AddressController.PATH)
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AddressController
         extends BaseController<Address, AddressCreateDto, AddressDto, AddressUpdateDto, AddressUpdateContext> {
 
