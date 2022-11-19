@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .authorizeRequests()
                 .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/ws/**").permitAll()
                 .anyRequest().authenticated();
 
         return http.build();
