@@ -54,6 +54,6 @@ public class DeviceServiceImpl extends BaseServiceImpl<Device> implements Device
     public void addMeasurement(String deviceId, Measurement measurement) {
         var device = findReferenceById(UUID.fromString(deviceId));
         measurement.setDevice(device);
-        measurementService.update(measurement);
+        measurementService.create(measurement);
     }
 }
