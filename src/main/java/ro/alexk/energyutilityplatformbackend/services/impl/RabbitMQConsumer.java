@@ -58,9 +58,24 @@ public class RabbitMQConsumer {
 
         deviceService.addMeasurement(measurementDto.device_id(), measurement);
         log.info("Saved: " + measurement);
+
+        sendMeasurement(measurementDto.device_id(), measurementDto);
     }
 
-    public void sendWarning(UUID userId, String message) {
+    private void sendMeasurement(String deviceId, MeasurementMQDto measurement) {
+        try {
+            simpMessagingTemplate.convertAndSend(
+                    "/topic/device/" + deviceId,
+                    new ObjectMapper().writeValueAsString(measurement)
+            );
+        } catch (JsonProcessingException e) {
+            log.warn("Could not serialize measurement.");
+            return;
+        }
+        log.info("Measurement sent for device: " + deviceId);
+    }
+
+    private void sendWarning(UUID userId, String message) {
         simpMessagingTemplate.convertAndSend("/topic/" + userId, message);
         log.info("Warning sent to user: " + userId);
     }

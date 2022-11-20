@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Mapper(
         componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {DeviceMapper.class}
+        unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
 public abstract class MeasurementMapper {
 
