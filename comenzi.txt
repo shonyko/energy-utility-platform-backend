@@ -1,0 +1,4 @@
+# Generare chei pentru JWT
+openssl genrsa -out keypair.pem 2048
+openssl rsa -pubout -in keypair.pem -out public.pem
+openssl pkcs8 -topk8 -nocrypt -inform PEM  -outform PEM -in keypair.pem -out private.pem
