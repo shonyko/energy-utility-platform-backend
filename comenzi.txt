@@ -2,3 +2,6 @@
 openssl genrsa -out keypair.pem 2048
 openssl rsa -pubout -in keypair.pem -out public.pem
 openssl pkcs8 -topk8 -nocrypt -inform PEM  -outform PEM -in keypair.pem -out private.pem
+
+# Compilare protobuf pentru frontend
+protoc --plugin=protoc-gen-ts="D:\Faculta\An4\sem1\SD\proj\energy-utility-platform-frontend\node_modules\.bin\protoc-gen-ts.cmd" --js_out="import_style=commonjs,binary:..\generated" --ts_out="service=grpc-web:..\generated" ChatService.proto
