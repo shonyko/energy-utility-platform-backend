@@ -9,6 +9,7 @@ import ro.alexk.energyutilityplatformbackend.dtos.user.UserCreateDto;
 import ro.alexk.energyutilityplatformbackend.dtos.user.UserDto;
 import ro.alexk.energyutilityplatformbackend.dtos.user.UserUpdateDto;
 import ro.alexk.energyutilityplatformbackend.entities.User;
+import ro.alexk.energyutilityplatformbackend.enums.Role;
 import ro.alexk.energyutilityplatformbackend.mappers.DeviceMapper;
 import ro.alexk.energyutilityplatformbackend.mappers.UserMapper;
 import ro.alexk.energyutilityplatformbackend.mappers.context.UserUpdateContext;
@@ -26,12 +27,21 @@ public class UserController extends BaseController<User, UserCreateDto, UserDto,
 
     private final UserService userService;
 
+    private final UserMapper userMapper;
     private final DeviceMapper deviceMapper;
 
     public UserController(UserService service, UserMapper mapper, DeviceMapper deviceMapper) {
         super(service, mapper, UserUpdateContext::new);
         this.userService = service;
+        this.userMapper = mapper;
         this.deviceMapper = deviceMapper;
+    }
+
+    @GetMapping("/by-role/{role}")
+    public ResponseEntity<Set<UserDto>> getByRole(@PathVariable Role role) {
+        return ResponseEntity.ok(
+            userMapper.map(userService.findByRole(role))
+        );
     }
 
     @GetMapping("/{userId}/devices")
