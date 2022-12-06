@@ -36,17 +36,21 @@ public class ChatServiceImpl extends ChatServiceGrpc.ChatServiceImplBase {
                         .setChatMessage(request)
                         .build()
         );
+        responseObserver.onCompleted();
     }
 
     @Override
     public void sendTypingNotification(TypingNotification request, StreamObserver<nothing> responseObserver) {
-        log.info(request.getFrom() + " is typing to " + request.getTo());
+        if(request.getIsTyping()) log.info(request.getFrom() + " is typing to " + request.getTo());
+        else log.info(request.getFrom() + " is not typing anymore to " + request.getTo());
+
         subscriptions.get(request.getTo()).onNext(
                 Message.newBuilder()
                         .setMessageType(MessageType.TYPING_NOTIFICATION)
                         .setTypingNotification(request)
                         .build()
         );
+        responseObserver.onCompleted();
     }
 
     @Override
@@ -58,5 +62,6 @@ public class ChatServiceImpl extends ChatServiceGrpc.ChatServiceImplBase {
                         .setMessageReadNotification(request)
                         .build()
         );
+        responseObserver.onCompleted();
     }
 }
