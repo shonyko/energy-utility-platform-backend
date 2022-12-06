@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/login", "/register").permitAll()
                 .antMatchers("/ws/**").permitAll()
+                .antMatchers("/ro.alexk.grpc.ChatService/**").permitAll()
                 .anyRequest().authenticated();
 
         return http.build();

@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package ro.alexk.energyutilityplatformbackend.grpc;
+
+option java_multiple_files = true;
+option java_package = "ro.alexk.energyutilityplatformbackend.grpc";
+
+enum MessageType {
+  CHAT_MESSAGE = 0;
+  TYPING_NOTIFICATION = 1;
+  MESSAGE_READ_NOTIFICATION = 2;
+}
+
+message Message {
+  MessageType messageType = 1;
+  ChatMessage chatMessage = 2;
+  TypingNotification typingNotification = 3;
+  MessageReadNotification messageReadNotification = 4;
+}
+
+message ChatMessage {
+  string from = 1;
+  string to = 2;
+  string message = 3;
+}
+
+message TypingNotification {
+  string from = 1;
+  string to = 2;
+  bool isTyping = 3;
+}
+
+message MessageReadNotification {
+  string from = 1;
+  string to = 2;
+}
+
+message Subscription {
+  string id = 1;
+}
+
+message nothing {}
+
+service ChatService {
+  rpc subscribeToChat(Subscription) returns(stream Message);
+  rpc unsubscribeFromChat(Subscription) returns(nothing);
+
+  rpc sendMessage(ChatMessage) returns (nothing);
+  rpc sendTypingNotification(TypingNotification) returns (nothing);
+  rpc sendMessageReadNotification(MessageReadNotification) returns(nothing);
+}

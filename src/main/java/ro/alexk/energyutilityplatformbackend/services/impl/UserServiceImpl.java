@@ -3,11 +3,13 @@ package ro.alexk.energyutilityplatformbackend.services.impl;
 import org.springframework.stereotype.Service;
 import ro.alexk.energyutilityplatformbackend.entities.Device;
 import ro.alexk.energyutilityplatformbackend.entities.User;
+import ro.alexk.energyutilityplatformbackend.enums.Role;
 import ro.alexk.energyutilityplatformbackend.repositories.UserRepository;
 import ro.alexk.energyutilityplatformbackend.services.DeviceService;
 import ro.alexk.energyutilityplatformbackend.services.UserService;
 
 import javax.persistence.EntityExistsException;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,6 +37,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         if (userRepository.existsByCredentialsUsernameAndIdNot(user.getUsername(), user.getId()))
             throw new EntityExistsException("Username already exists!");
         return super.update(user);
+    }
+
+    @Override
+    public Set<User> findByRole(Role role) {
+        return new HashSet<>(userRepository.findByRole(role));
     }
 
     @Override
