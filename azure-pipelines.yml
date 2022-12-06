@@ -3,15 +3,15 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+  - master
 
 resources:
-- repo: self
+  - repo: self
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '9d7e0a0b-fafb-40bd-9cd9-384095b42aaa'
-  imageRepository: 'alexandrukovacs30244backend'
+  dockerRegistryServiceConnection: '6f87e62a-47c1-46fb-a24b-d0ed017bc160'
+  imageRepository: 'shonykoenergyutilityplatformbackend'
   containerRegistry: 'containerregistryalexandrukovacs30244.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
@@ -20,26 +20,26 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      name: local
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags:  |
-          latest
-          $(Build.BuildId)
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: ''
-        Contents: 'docker-compose.yml'
-        TargetFolder: '$(Agent.WorkFolder)'
+  - stage: Build
+    displayName: Build stage
+    jobs:
+      - job: Build
+        displayName: Build
+        pool:
+          name: local
+        steps:
+          - task: Docker@2
+            displayName: Build and push an image to container registry
+            inputs:
+              command: buildAndPush
+              repository: $(imageRepository)
+              dockerfile: $(dockerfilePath)
+              containerRegistry: $(dockerRegistryServiceConnection)
+              tags:  |
+                latest
+                $(Build.BuildId)
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: ''
+              Contents: 'docker-compose.yml'
+              TargetFolder: '$(Agent.WorkFolder)'
