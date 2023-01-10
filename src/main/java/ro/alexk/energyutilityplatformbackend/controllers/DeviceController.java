@@ -1,8 +1,10 @@
 package ro.alexk.energyutilityplatformbackend.controllers;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ro.alexk.energyutilityplatformbackend.annotations.Admin;
 import ro.alexk.energyutilityplatformbackend.annotations.CheckUUID;
 import ro.alexk.energyutilityplatformbackend.dtos.device.DeviceCreateDto;
 import ro.alexk.energyutilityplatformbackend.dtos.device.DeviceDto;
@@ -18,6 +20,7 @@ import ro.alexk.energyutilityplatformbackend.services.DeviceService;
 import javax.validation.Valid;
 import java.util.Set;
 
+@Admin
 @Validated
 @RestController
 @RequestMapping(DeviceController.PATH)
@@ -46,6 +49,7 @@ public class DeviceController
         return ResponseEntity.ok(mapper.map(devices));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
     @GetMapping("/{deviceId}/measurements")
     public ResponseEntity<Set<MeasurementDto>> getMeasurements(@PathVariable @CheckUUID String deviceId) {
         var measurements = deviceService.getMeasurements(deviceId);

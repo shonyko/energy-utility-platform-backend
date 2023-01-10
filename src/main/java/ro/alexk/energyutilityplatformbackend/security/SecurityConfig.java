@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .authorizeRequests()
                 .antMatchers("/login", "/register").permitAll()
+                .antMatchers("/debug**").permitAll()
                 .antMatchers("/ws/**").permitAll()
                 .antMatchers("/ro.alexk.grpc.ChatService/**").permitAll()
                 .anyRequest().authenticated();
